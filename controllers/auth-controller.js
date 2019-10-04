@@ -9,6 +9,26 @@ const Model = require('../models/user');
 
 const successMessage = 'success';
 
+// simple validation on  user signup 
+const createValidate = [
+    check('name').
+    isLength({ min: 3 }).
+    withMessage('name must be 3 characters at least'),
+
+    check('authorization').
+    isLength({ min: 8 }).
+    withMessage('authorization must be 8 characters at least'),
+
+    check('deviceToken').
+    isLength({ min: 8 }).
+    withMessage('deviceToken must be 8 characters at least'),
+
+    check('fingerPrint').
+    isLength({ min: 8 }).
+    withMessage('fingerPrint must be 8 characters at least')
+]
+
+
 function getAll(req, res, next) {
     Model.find().
     then((doc)=>{
@@ -34,13 +54,7 @@ function createUser(req, res, next) {
     })
 }
 
-// simple validation on  user signup 
-const createValidate = [
-    check('name','must be 3 characters at least').isLength({ min: 3 }),
-    check('authorization','must be 8 characters at least').isLength({ min: 8 }),
-    check('deviceToken','must be 8 characters at least').isLength({ min: 8 }),
-    check('fingerPrint','must be 8 characters at least').isLength({ min: 8 })
-]
+
 
 
 function delete_(req, res, next) {
