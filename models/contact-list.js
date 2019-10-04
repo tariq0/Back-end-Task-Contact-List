@@ -1,20 +1,28 @@
 //
 const mongoose = require('mongoose');
 
-const ContactListSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    email: String,
-    mobile: [String],
-    date: {
-        type: Date,
-        default: Date.now
-    },
-    authorization: String,
-    deviceToken: String,
-    fingerPrint: String
-})
+const ContactListSchema = new mongoose.Schema(
+    {
+        firstName: String,
+        lastName: String,
+        email: {
+            type: String,
+            unique: true
+        },
+        mobileNumber: [String],
+        createdAt: {
+            type: Date,
+            default: Date.now
+        },
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }, {
+    versionKey: false
+    }
+)
 
-const ContactListModel = mongoose.model('contactList', ContactListSchema);
+const ContactListModel = mongoose.model('ContactList', ContactListSchema);
 
 module.exports = ContactListModel;
