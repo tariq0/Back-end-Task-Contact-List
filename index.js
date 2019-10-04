@@ -1,6 +1,7 @@
 //
 //
 const express = require('express');
+const isAuthenticated = require('./middlewares/auth-middleware');
 const homeRoutes = require('./routes/home-routes');
 const authRoutes = require('./routes/auth-routes');
 const contactListRoutes = require('./routes/contact-list-routes');
@@ -16,6 +17,8 @@ app.use(express.json());
 
 app.use('', homeRoutes);
 app.use('/auth', authRoutes);
+
+app.use(isAuthenticated);
 app.use('/contacts', contactListRoutes);
 
 app.listen(port, () => {
