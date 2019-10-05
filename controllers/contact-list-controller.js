@@ -46,6 +46,7 @@ function getAll(req, res, next) {
 }
 
 // get records for specific user
+// which is getList
 function getAllByUser(req, res, next) {
     Model.find({ userId: req.userId }).
         then((doc) => {
@@ -83,7 +84,7 @@ function getLatest(req, res, next) {
 
 
 // add contacts
-function create(req, res, next) {
+function addNewContact(req, res, next) {
 
     const errors = validationResult(req);
     // validation errors
@@ -141,7 +142,7 @@ function delete_(req, res, next) {
 module.exports = {
     getAll: getAll,
     getLatest: getLatest,
-    create: create,
+    addNewContact: addNewContact,
     delete_: delete_,
     createValidate: createValidate,
     getAllByUser: getAllByUser

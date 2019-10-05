@@ -3,39 +3,39 @@
 //
 
 const express = require('express');
-const ContactListController = require('../controllers/contact-list-controller');
+const ContactsController = require('../controllers/contact-list-controller');
 const isAuthenticated = require('../middlewares/auth-middleware');
 const notFound = require('../middlewares/notfound-middleware');
 const router = express.Router();
 
 // for test, gets all contact list
-router.get('/getAll', ContactListController.getAll);
+router.get('/getAll', ContactsController.getAll);
 
 // only users with tokens can access 
 
 router.get(
     '/getList',
     isAuthenticated,
-    ContactListController.getAllByUser
+    ContactsController.getAllByUser
 );
 
 router.get(
     '/getLatest',
     isAuthenticated,
-    ContactListController.getLatest
+    ContactsController.getLatest
 );
 
 router.post(
     '/addContact',
     isAuthenticated,
-    ContactListController.createValidate,
-    ContactListController.create
+    ContactsController.createValidate,
+    ContactsController.addNewContact
 );
 
 
 router.delete('/deleteContact/:id',
     isAuthenticated,
-    ContactListController.delete_
+    ContactsController.delete_
 );
 
 // for undefined routes
